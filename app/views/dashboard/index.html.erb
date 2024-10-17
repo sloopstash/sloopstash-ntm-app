@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Ti4k1Sl+hxPh6uotn9xPENh7uueO2mgJKBAK0Guu3I3I9bqFdldS0DhswfJ4DEbE" crossorigin="anonymous">
+  <!-- Custom CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    /* Add the @import rule here */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+    body {
+      color: #fff;
+      background: #746C70;
+      padding-top: 5rem;
+      font-family: 'Roboto', sans-serif;
+      border: none !important;
+    }
+    .selected {
+      background-color: #f8d7da; /* Red color for indication */
+    }
+   
+    .note:hover {
+      background-color: #8E8E8E; /* Change this to your desired hover background color */
+    }
+    .logout-form {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+
+    .note.selected {
+      background-color: #f8d7da; /* Change background color to indicate selection */
+      border-color: #f5c6cb; /* Change border color to indicate selection */
+    }
+
+    /* Custom styles for the create button */
+    .create-button {
+      background-color: #1D741B; /* Your desired color */
+      color: white;
+      padding: 20px 30px;
+      width: 120px;
+      height: 30px;
+<%#       font-size: 2.0rem; %>
+      font-size: 20px;
+      line-height: 1.5;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;NoteVault
+    }
+
+    .create-button:hover {
+      background-color: #155312; /* Darker shade for hover */
+    }
+
+    /* Style for the lead text */
+    .lead {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    /* Custom styles for the table */
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .custom-table th,
+    .custom-table td {
+      border: 1px solid #647C90;
+      padding: 10px;
+      text-align: left;
+    }
+
+    .custom-table th {
+      background-color: #E2DED0; /* Background color for table header */
+      color: #000; /* Text color for table header */
+    }
+
+    .custom-table td {
+      background-color: #E2DED0; /* Background color for table cells */
+      color: #000; /* Text color for table cells */
+    }
+
+    .custom-table tbody tr:nth-child(odd) {
+      background-color: #f8f9fa; /* Alternate row background color */
+    }
+
+    .custom-table tbody tr:hover {
+      background-color: #e9ecef; /* Hover row background color */
+
+    }
+     h1 {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem; 
+  }
+.create-button .fas {
+  /* Styles for the Font Awesome icon */
+  font-size: 1rem; /* Adjust icon size */
+  /* Add more styles as needed */
+}
+
+    
+  </style>
+</head>
+<body>
+
+<main class="container">
+  <div class="starter-template text-center py-5">
+    <h1>Welcome, <%= @user.username %>!</h1>
+ 
+
+    <p class="lead">Create something awesome!</p>
+
+    <!-- Create Button -->
+    
+    <div class="d-flex justify-content-center align-items-center mb-3">
+  <%= link_to new_note_path, class: "btn create-button me-3 text-center" do %>
+    <i class="fas fa-book me-1"></i> Create
+  <% end %>
+</div>
+
+
+    <!-- Display Notes -->
+    <!-- Display Notes -->
+<div class="note-box">
+  <% if @notes.present? %>
+  <table class="custom-table">
+    <thead>
+      <tr>
+        <th scope="col">S.No</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @notes.each_with_index do |note, index| %>
+        <tr class="note" data-note-id="<%= note.id %>">
+          <td><%= index + 1 %></td>
+          <td><%= note.title %></td>
+          <td><%= note.description %></td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Note Actions">
+              
+              <!-- <button class="btn btn-danger btn-sm delete-note" style="padding: 0;"> -->
+               
+               <%= button_to note, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm delete-note", style: "padding: 0;", "data-note-id": note.id, authenticity_token: true do %>
+                <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                <i class="fas fa-trash-alt"></i> <!-- Font Awesome delete icon -->
+                <% end %>
+              </button>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% else %>
+    <% if current_user == @user %> <!-- Check if the current user is viewing their own dashboard -->
+      
+    <% end %>
+  <% end %>
+</div>
+  
+  </div>
+</main>
+
+<!-- Sign-out Button -->
+<form action="/logout" method="post" class="logout-form">
+  <!-- Add a hidden input field for the Rails CSRF token -->
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <!-- Add a hidden input field with name="_method" and value="delete" -->
+  <input type="hidden" name="_method" value="delete">
+  
+<button type="submit" class="btn btn-danger py-2 px-2" style="height: 40px;" onclick="return confirm('Are you sure you want to sign out?')">
+  <i class="fas fa-sign-out-alt me-1"></i> Sign Out
+</button>
+
+
+</form>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-vhcJN0S10Pp+E0RAk+VuHzbdq2luY2ZbH/Y5l5nQuCNUwb+9j/+gIthLPECAgfvx" crossorigin="anonymous"></script>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-h+K7U5CnXl1h4OLbOXmI9AW9gwSlRUz7YAd3X6hAo4=" crossorigin="anonymous"></script>
+
+
+<script>
+  
+
+
+  $(document).on('click', '.delete-note', function(e) {
+  e.preventDefault(); // Prevent the default form submission
+  var noteId = $(this).data('note-id'); // Get the note ID from the data attribute
+  var tr = $(this).closest('tr'); // Get the closest table row to remove it after successful deletion
+
+  console.log('Deleting note with ID:', noteId);
+
+  // Confirm deletion action
+  if (confirm('Are you sure you want to delete this note?')) {
+    var deleteButton = $(this);
+    deleteButton.prop('disabled', true); // Disable the button to prevent multiple clicks
+
+    // Send an AJAX request to delete the note
+    $.ajax({
+      url: '/notes/' + noteId,
+      method: 'DELETE',
+      success: function() {
+        console.log('Note deleted successfully');
+        tr.remove(); // Remove the table row from the UI
+      },
+      error: function(xhr, status, error) {
+        console.error('Failed to delete note:', error);
+        deleteButton.prop('disabled', false); // Re-enable the button on error
+      },
+      complete: function() {
+        deleteButton.prop('disabled', false); // Re-enable the button after the request completes
+      }
+    });
+  }
+});
+
+
+  // Function to handle edit action
+  $('.edit-note').click(function(e) {
+    e.preventDefault(); // Prevent the default link behavior
+    var editUrl = $(this).attr('href'); // Get the edit URL from the link
+    // Navigate to the edit page for the note
+    window.location.href = editUrl;
+  });
+});
+
+</script>
+</body>
+</html>

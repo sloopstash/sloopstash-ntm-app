@@ -1,15 +1,16 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+@import "bootstrap";
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons';
+
+.card-title {
+  font-size: 24px; /* Adjust font size as desired */
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif; /* Example: Use Google Font 'Poppins' */
+}
+
+/* Adjust font size and font family for card text */
+.card-text {
+  font-size: 18px; /* Adjust font size as desired */
+  color: #555;
+  font-family: 'Roboto', sans-serif; /* Example: Use Google Font 'Roboto' */
+}

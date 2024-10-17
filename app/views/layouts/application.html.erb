@@ -1,23 +1,44 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Ntm" %></title>
+    <title>BootstrapExample</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-    <%= yield :head %>
-
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+
+    
   </head>
 
   <body>
+    
+    <% if flash[:notice] %>
+  <p class="alert alert-success"><%= flash[:notice] %></p>
+<% end %>
+<% if flash[:alert] %>
+  <p class="alert alert-danger"><%= flash[:alert] %></p>
+<% end %>
+
+<style type="text/css">
+  .alert-success,
+.alert-danger {
+  background-color: transparent; /* Set background color to transparent */
+  color: green; /* Default text color for success messages */
+}
+
+.alert-danger {
+  color: red; /* Default text color for error messages */
+}
+
+</style>
+
+
+    
+
     <%= yield %>
-  </body>
+
+    
+</body>
 </html>
