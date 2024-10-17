@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+<title>Bootstrap Sign up Form with Icons</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<style>
+body {
+  color: #fff;
+  background: #746C70;
+  font-family: 'Roboto', sans-serif;
+}
+.form-control {
+  font-size: 15px;
+}
+.form-control, .form-control:focus, .input-group-text {
+  border-color: #e1e1e1;
+}
+.form-control, .btn {        
+  border-radius: 3px;
+}
+.signup-form {
+  width: 400px;
+  margin: 0 auto;
+  padding: 30px 0;    
+}
+.signup-form form {
+  color: #999;
+  border-radius: 3px;
+  margin-bottom: 15px;
+  background: #E2DED0;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  margin-top: 90px;
+}
+.signup-form h2 {
+  color: #004369;
+  font-weight: bold;
+  margin-top: 0;
+}
+.signup-form hr {
+  margin: 0 -30px 20px;
+}
+.signup-form .form-group {
+  margin-bottom: 20px;
+}
+.signup-form label {
+  font-weight: normal;
+  font-size: 15px;
+}
+.signup-form .form-control {
+  min-height: 38px;
+  box-shadow: none !important;
+} 
+.signup-form .input-group-addon {
+  max-width: 42px;
+  text-align: center;
+} 
+.signup-form .btn, .signup-form .btn:active {        
+  font-size: 16px;
+  font-weight: bold;
+  background: #4E4F50 !important;
+  border: none;
+  min-width: 140px;
+}
+.signup-form .btn:hover, .signup-form .btn:focus {
+  background: #647C90 !important;
+}
+.signup-form a {
+  color: #fff;  
+  text-decoration: underline;
+}
+.signup-form a:hover {
+  text-decoration: none;
+}
+.signup-form form a {
+  color: #647C90;
+  text-decoration: none;
+} 
+.signup-form form a:hover {
+  text-decoration: underline;
+}
+.signup-form .fa {
+  font-size: 21px;
+}
+.signup-form .fa-paper-plane {
+  font-size: 18px;
+}
+.signup-form .fa-check {
+  color: #fff;
+  left: 17px;
+  top: 18px;
+  font-size: 7px;
+  position: absolute;
+}
+.invalid-feedback {
+  display: none;
+  width: 100%;
+  margin-top: .25rem;
+  font-size: 80%;
+  color: #647C90;
+}
+.is-invalid ~ .invalid-feedback {
+  display: block;
+}
+.app-name {
+  font-size: 72px; /* Updated font size */
+}
+.description {
+  font-size: 36px; /* Updated font size */
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h1 class="text-center mt-3">NoteManagement</h1>
+      <p class="text-center mb-3">NoteManagement makes it easy to jot down your thoughts and ideas quickly. Keep your notes organized and accessible anytime, anywhere.</p>
+      <div class="signup-form" style="margin-top: -70px;">
+        <form action="/users" id="signupForm" method="post" novalidate>
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+             <!-- <h2>Sign Up</h2> -->
+            <h2 class="text-center">Sign Up</h2>
+
+            <hr>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <span class="fa fa-user"></span>
+                  </span>                    
+                </div>
+                <input type="text" class="form-control" id="username" name="user[username]" placeholder="Username" required pattern="[A-Za-z0-9]+" title="Username should only contain letters and numbers.">
+                <!-- <input type="text" class="form-control" id="username" name="user[username]" placeholder="Username" required> -->
+                <div class="invalid-feedback">Please choose a username. Only letters and numbers are allowed.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-paper-plane"></i>
+                  </span>                    
+                </div>
+                <input type="email" class="form-control" id="email" name="user[email]" placeholder="Email Address" required>
+                <div class="invalid-feedback">Please enter a valid email address.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-lock"></i>
+                  </span>                    
+                </div>
+                <input type="password" class="form-control" id="password" name="user[password]" placeholder="Password" required>
+                <div class="invalid-feedback">Please provide a password.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-lock"></i>
+                    <i class="fa fa-check"></i>
+                  </span>                    
+                </div>
+                <input type="password" class="form-control" id="confirm_password" name="user[confirm_password]" placeholder="Confirm Password" required>
+                <div class="invalid-feedback">Passwords do not match.</div>
+              </div>
+            </div>
+            <div class="form-group text-center">
+              <button type="submit" class="btn btn-primary btn-lg">Create</button>
+            </div>
+            <div class="text-center" style="text-align: left;">
+              <a href="#" style="color: #613659;"><i class="fa fa-hand-o-right" style="margin-left: 5px;"></i>Signin </a>
+            </div>
+
+          </form>
+        </div>
+     
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+</div>
+
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  var form = document.getElementById('signupForm');
+
+  form.addEventListener('submit', function (event) {
+    // Check if form is valid
+    if (!form.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    // Custom validation for password match
+    var password = document.getElementById('password');
+    var confirm_password = document.getElementById('confirm_password');
+    if (password.value !== confirm_password.value) {
+      confirm_password.setCustomValidity('Passwords do not match');
+    } else {
+      confirm_password.setCustomValidity('');
+    }
+
+    form.classList.add('was-validated');
+  }, false);
+
+  // Remove custom validity message on input
+  var password = document.getElementById('password');
+  var confirm_password = document.getElementById('confirm_password');
+  confirm_password.addEventListener('input', function() {
+    if (password.value === confirm_password.value) {
+      confirm_password.setCustomValidity('');
+    }
+  });
+})();
+
+</script>
+
+</body>
+</html>

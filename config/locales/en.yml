@@ -27,5 +27,13 @@
 #       "yes": yup
 #       enabled: "ON"
 
-en:
-  hello: "Hello world"
+# en:
+#   hello: "Hello world"
+  en:
+  sessions:
+    new:
+      signed_in_successfully: 'Signed in successfully!'
+      invalid_username_or_password: 'Invalid username or password'
+    destroy:
+      signed_out_successfully: 'Signed out successfully!'
+      
