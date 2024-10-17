@@ -7,4 +7,5 @@ class CreateUserProfiles < ActiveRecord::Migration[7.2]
       t.string :email
     end
   end
+ end
 end

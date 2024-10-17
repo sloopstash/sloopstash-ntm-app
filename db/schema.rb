@@ -14,13 +14,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_15_132124) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "articles", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "notes", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -30,19 +23,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_15_132124) do
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.string "title"
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "email"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "users", id: :serial, force: :cascade do |t|
-    t.string "username", limit: 50, null: false
-    t.string "email", limit: 100, null: false
-    t.datetime "created_at", precision: nil, default: -> { "CURRENT_TIMESTAMP" }
-    t.string "password_digest"
-
-    t.unique_constraint ["email"], name: "users_email_key"
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "notes", "users"
