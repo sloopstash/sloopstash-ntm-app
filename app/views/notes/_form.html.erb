@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+<title>Bootstrap Create Your Note Form with Icons</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  color: #fff;
+  background: #746C70;
+  font-family: 'Roboto', sans-serif;
+}
+.form-control1, .form-control2 {
+  font-size: 15px;
+  height: 38px;
+  border-radius: 3px;
+  border: 1px solid #e1e1e1;
+}
+.form-control2 {
+  min-height: 200px;
+}
+.create-form {
+  width: 400px;
+  margin: 0 auto;
+  padding: 30px 0;
+}
+.create-form form {
+  border-radius: 3px;
+  padding: 30px;
+  margin-top: 60px;
+  background-color: #E2DED0;
+}
+.create-form h2 {
+  color: #004369;
+  font-weight: bold;
+  margin-top: 0;
+  text-align: center;
+}
+.create-form hr {
+  margin: 0 -30px 20px;
+}
+.btn1, .btn2 {
+  min-width: 150px;
+}
+.green-button {
+  background-color: #1D741B;
+  color: white;
+}
+.green-button:hover {
+  background-color: #647C90; /* Change this to your desired hover color */
+}
+.red-button {
+  background-color: #FC2E20;
+  color: white;
+}
+.red-button:hover {
+  background-color: #647C90; /* Change this to your desired hover color */
+}
+.app-name {
+  font-size: 36px; /* Change the font size as needed */
+  line-height: 1; /* Adjust the line height for vertical alignment */
+}
+.app-name {
+  font-size: 60px;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 30px; 
+}
+
+.btn1 {
+  margin-right: 5px; /* Adjust spacing between buttons */
+  
+}
+
+.btn2 {
+  margin-left: 5px; /* Adjust spacing between buttons */
+}
+
+
+
+</style>
+</head>
+<body>
+  <div class="container">
+<div class="create-form">
+  <!-- <h1 class="text-center">QuickNote</h1> -->
+  <h1 class="app-name">NoteManagement</h1>
+ 
+
+  <form id="createForm" action="/notes" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <h2>Create your note</h2>
+  <hr>
+  <div class="form-group">
+    <input type="text" class="form-control form-control1" name="note[title]" placeholder="Title" required="required">
+  </div>
+  <div class="form-group">
+    <textarea class="form-control form-control2" name="note[description]" placeholder="Description" rows="5" required="required"></textarea>
+  </div>
+  <div class="form-group text-center">
+    <button type="submit" class="btn btn-primary btn1 green-button">Save</button>
+  <%# </div>
+  <div class="form-group text-center"> %>
+    <%# <button type="submit" class="btn btn-primary btn2 red-button">Cancel</button> %>
+    <button type="button" class="btn btn-primary btn2 red-button" onclick="window.location='<%= dashboard_path %>';">Cancel</button>
+  </div>
+</form>
+  
+</div>
+</body>
+</html>
